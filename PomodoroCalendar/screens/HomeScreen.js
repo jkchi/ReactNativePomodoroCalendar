@@ -1,23 +1,29 @@
 import { Button } from '@rneui/themed';
 import { View, Text, StyleSheet } from 'react-native';
-import { signOut } from '../utils/AuthManager';
+import { signOut } from "../utils/userSlice";
+import { useDispatch,useSelector } from 'react-redux'
+
 
 function HomeScreen({navigation}) {
+  const userData = useSelector((state) => state.user.userData);
+  const dispatch  = useDispatch();
+
+
   return (
     <View style={styles.container}>
-      <Text>
-        You're signed in!
-      </Text>
+      
+      {/* <MainNavigator/> */}
+      {/* useEffect is trigger after component rerender
+      and userData will be null, here use .? */}
+      <Text>`hi {userData?.email}`</Text>
       <Button
         onPress={async () => {
-            try {
-              console.log('started')
-              await signOut();
-              console.log('finished')
-              navigation.navigate('Login');
-            } catch (error) {
-              Alert.alert("Sign Out Error", error.message,[{ text: "OK" }])
+            const signOutResult =  await dispatch(signOut());
+
+            if (signOutResult.error !=  null){
+              Alert.alert("Sign out Error", signOutResult.error.message,[{ text: "OK" }])
             }
+
         }}
       >
         Now sign out!

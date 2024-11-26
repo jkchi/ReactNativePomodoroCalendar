@@ -1,5 +1,3 @@
-
-import { useState, useEffect } from 'react';
 import { View, StyleSheet, } from 'react-native';
 import InfoBox from '../component/InfoBox';
 

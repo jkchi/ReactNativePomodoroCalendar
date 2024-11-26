@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -8,11 +8,20 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { signIn,signUp } from '../utils/AuthManager';
+import { signIn,signUp } from "../utils/userSlice";
+import { useDispatch,useSelector } from 'react-redux'
+
 
 function InfoBox({ title, navigation,submitScreen, redirectScreen}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch  = useDispatch();
+
+  const resetInput = () => {
+    setEmail('');
+    setPassword('');
+  }
+
 
   return (
     <View style={styles.loginContainer}>
@@ -55,6 +64,7 @@ function InfoBox({ title, navigation,submitScreen, redirectScreen}) {
       <TouchableOpacity
         style={styles.redirectButton}
         onPress={ () => {
+          resetInput();
           navigation.navigate(redirectScreen);
         }}
       >
@@ -64,26 +74,27 @@ function InfoBox({ title, navigation,submitScreen, redirectScreen}) {
       <TouchableOpacity
         style={styles.loginButton}
         onPress={async () => {
-          if (title === "Login"){
+                
+        if (title === "Login"){
 
-            try{
-              await signIn(email,password);
-              navigation.navigate(submitScreen);
-            }
-            catch(error) {
-              Alert.alert("Sign In Error", error.message,[{ text: "OK" }])
-            }
-
+          // await only make sure thunk is done
+          // but the redux state could possibly not updated
+          // hence using if could still see the old state
+          const signInThunkResult = await dispatch(signIn({email,password}));
+          
+          if (signInThunkResult.error !=  null){
+            Alert.alert("Sign In Error", signInThunkResult.error.message,[{ text: "OK" }])
           }
+        }
 
-          else{
-            try {
-              await signUp(email, password);
-              navigation.navigate("Home");
-            } catch(error) {
-              Alert.alert("Sign Up Error", error.message,[{ text: "OK" }])
-            }
+        else {
+          const signupThunkResult = await dispatch(signUp({email,password}));
+          if (signupThunkResult.error !=  null){
+            Alert.alert("Sign up Error", signupThunkResult.error.message,[{ text: "OK" }])
           }
+        }
+        resetInput();
+
         }}
       >
         <Text style={styles.loginButtonText}>{title}</Text>

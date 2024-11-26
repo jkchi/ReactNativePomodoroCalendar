@@ -10,7 +10,7 @@ function RegisterScreen({navigation}) {
       <View style={styles.bodyContainer}>
         <InfoBox title = "Register" 
                  navigation={navigation}
-                 submitScreen = 'Login' 
+                 submitScreen = 'Home' 
                  redirectScreen = 'Login'
                  />
       </View>
