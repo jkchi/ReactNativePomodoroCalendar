@@ -13,11 +13,13 @@ import { useDispatch,useSelector } from 'react-redux'
 
 
 function InfoBox({ title, navigation,submitScreen, redirectScreen}) {
+  const [name, setname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch  = useDispatch();
 
   const resetInput = () => {
+    setname("")
     setEmail('');
     setPassword('');
   }
@@ -26,6 +28,24 @@ function InfoBox({ title, navigation,submitScreen, redirectScreen}) {
   return (
     <View style={styles.loginContainer}>
       <Text style={styles.title}>{title}</Text>
+
+      { title == "Register" ? <View style={styles.inputContainer}>
+        <Ionicons
+          name="id-card-outline"
+          size={20}
+          color="gray"
+          style={styles.icon}
+        />
+        <TextInput
+          style={styles.input}
+          value={name}
+          placeholder="Name"
+          placeholderTextColor="gray"
+          underlineColorAndroid="transparent"
+          onChangeText={(text) => setname(text)}
+        />
+      </View> : null}
+
       <View style={styles.inputContainer}>
         <Ionicons
           name="mail-outline"
@@ -88,7 +108,8 @@ function InfoBox({ title, navigation,submitScreen, redirectScreen}) {
         }
 
         else {
-          const signupThunkResult = await dispatch(signUp({email,password}));
+          const signupThunkResult = await dispatch(signUp({name,email,password}));
+          console.log(signupThunkResult);
           if (signupThunkResult.error !=  null){
             Alert.alert("Sign up Error", signupThunkResult.error.message,[{ text: "OK" }])
           }

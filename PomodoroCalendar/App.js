@@ -1,6 +1,7 @@
 import AppContainer from './AppContainer';
 import { Provider } from 'react-redux';
 import store from './store';
+import React from "react";
 
 
 function App() {
@@ -11,6 +12,4 @@ function App() {
   );
 }
 export default App;
-
-
 

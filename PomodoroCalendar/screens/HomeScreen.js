@@ -2,6 +2,9 @@ import { Button } from '@rneui/themed';
 import { View, Text, StyleSheet } from 'react-native';
 import { signOut } from "../utils/userSlice";
 import { useDispatch,useSelector } from 'react-redux'
+import React from 'react';
+
+import { CalendarBody, CalendarContainer, CalendarHeader } from '@howljs/calendar-kit';
 
 
 function HomeScreen({navigation}) {
@@ -15,7 +18,8 @@ function HomeScreen({navigation}) {
       {/* <MainNavigator/> */}
       {/* useEffect is trigger after component rerender
       and userData will be null, here use .? */}
-      <Text>`hi {userData?.email}`</Text>
+      
+      <Text>`hi {userData?.displayName}`</Text>
       <Button
         onPress={async () => {
             const signOutResult =  await dispatch(signOut());
@@ -28,6 +32,7 @@ function HomeScreen({navigation}) {
       >
         Now sign out!
       </Button>
+      
     </View>
   );
 }
@@ -38,6 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'pink'
-  }
+  },
 });
 export default HomeScreen;

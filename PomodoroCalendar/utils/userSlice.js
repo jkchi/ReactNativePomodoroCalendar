@@ -2,7 +2,8 @@ import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import firebaseConfig from "../secret";
 
 import { getAuth, signInWithEmailAndPassword, 
-  signOut as fbSignOut, createUserWithEmailAndPassword
+  signOut as fbSignOut, createUserWithEmailAndPassword,
+  updateProfile
 } from 'firebase/auth';
 
 import { getFirestore, collection, query,
@@ -72,9 +73,15 @@ export const signOut = createAsyncThunk(
 
   export const signUp = createAsyncThunk(
     'user/signUp',
-    async ({email,password}) => {
+    async ({name, email,password}) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user
+      let user = userCredential.user;
+      
+      await updateProfile(user, {
+        displayName: name,
+      });
+
+      user = auth.currentUser;
       return parseUser(user);
     }
   )

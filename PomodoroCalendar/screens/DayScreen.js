@@ -1,11 +1,21 @@
-import { View, Text, StyleSheet } from 'react-native';
-
+import { View, Text, StyleSheet,TouchableOpacity } from 'react-native';
 function DayScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Text>
         This is Day Screen
       </Text>
+
+      <TouchableOpacity
+        onPress={ () => {
+          navigation.navigate('Week')
+        }}
+      >
+        <Text>
+         go to Week
+        </Text>
+        
+      </TouchableOpacity>
     </View>
   );
 }

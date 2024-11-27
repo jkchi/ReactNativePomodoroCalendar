@@ -4,7 +4,7 @@ function PomodoroScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Text>
-        This is Day Screen
+        This is Pomodoro Screen
       </Text>
     </View>
   );

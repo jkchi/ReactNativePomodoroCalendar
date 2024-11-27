@@ -13,7 +13,9 @@ const CalendarContainer = () => {
     const Stack = createNativeStackNavigator();
   
     return (
-          <Stack.Navigator initialRouteName='Day' >
+          <Stack.Navigator initialRouteName='Day' 
+            screenOptions={{headerShown: false}}
+          >
             <Stack.Screen name='Day' component={DayScreen}/>
             <Stack.Screen name='Week' component={WeekScreen}/>
           </Stack.Navigator>
@@ -24,7 +26,9 @@ const StatsContainer = () => {
   const Stack = createNativeStackNavigator();
 
   return (
-        <Stack.Navigator initialRouteName='Day' >
+        <Stack.Navigator initialRouteName='DayTask' 
+          screenOptions={{headerShown: false}}
+        >
           <Stack.Screen name='DayTask' component={DayTaskScreen}/>
           <Stack.Screen name='TaskStats' component={TaskStatsScreen}/>
         </Stack.Navigator>
@@ -78,7 +82,7 @@ const MainNavigator = () => {
         />
 
         <Tabs.Screen 
-          name="Analytics" 
+          name="Pomodoro" 
           component={PomodoroScreen}
           options={{
             tabBarIcon: ({focused, color, size}) => {
@@ -94,7 +98,7 @@ const MainNavigator = () => {
           }}/>
         
         <Tabs.Screen 
-          name="Pomodoro" 
+          name="Analytics" 
           component={StatsContainer}
           options={{
             tabBarIcon: ({focused, color, size}) => {
