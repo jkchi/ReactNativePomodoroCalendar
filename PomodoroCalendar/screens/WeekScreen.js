@@ -18,7 +18,7 @@ function WeekScreen({navigation}) {
   return (
     <View style = {styles.container}>
 
-      <Text>
+      {/* <Text>
         This is Week Scren
       </Text>
 
@@ -30,7 +30,7 @@ function WeekScreen({navigation}) {
         <Text>
          go to Day
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <Calendar/>
       
