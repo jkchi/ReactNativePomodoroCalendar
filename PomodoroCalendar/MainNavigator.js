@@ -1,26 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import DayScreen from './screens/DayScreen';
 import WeekScreen from './screens/WeekScreen';
 import PomodoroScreen from './screens/PomodoroScreen';
 import DayTaskScreen from './screens/DayTaskScreen';
 import TaskStatsScreen from './screens/TaskStatsScreen';
 import { Icon } from '@rneui/themed';
-import HomeScreen from './screens/HomeScreen';
+import TabBarButton from './component/TabButton';
+import {useDispatch } from 'react-redux';
+import { toggleCalValue } from './utils/appSlice';
 
-const CalendarContainer = () => {
-    const Stack = createNativeStackNavigator();
-  
-    return (
-          <Stack.Navigator initialRouteName='Day' 
-            screenOptions={{headerShown: false}}
-          >
-            <Stack.Screen name='Day' component={DayScreen}/>
-            <Stack.Screen name='Week' component={WeekScreen}/>
-          </Stack.Navigator>
-    );
-}
 
 const StatsContainer = () => {
   const Stack = createNativeStackNavigator();
@@ -39,79 +28,62 @@ const StatsContainer = () => {
 
 const MainNavigator = () => {
   const Tabs = createBottomTabNavigator();
+  const dispatch = useDispatch();
 
   return(
-      <NavigationContainer independent = {true}>
-      
-      <Tabs.Navigator
-        screenOptions={{headerShown: false}}
-      >
-        
-      <Tabs.Screen 
-        name="Home" 
-        component={HomeScreen}
-        options={{
-          tabBarIcon: ({focused, color, size}) => {
-            return (
-                <Icon 
-                name="home"
-                type="mui"
-                color={color}
-                size={size}
-              />
-            );
-          }
-        }}/>
-      
+    <NavigationContainer independent = {true}>
+    
+    <Tabs.Navigator
+      screenOptions={{headerShown: false}}
+    >
+              
+    <Tabs.Screen 
+      name="Calendar" 
+      component={WeekScreen}
+      options={{
+        tabBarButton: (props) => (
+          <TabBarButton
+            {...props}
+            label="Calendar"
+            iconProvider = "font-awesome"
+            iconName="calendar"
+            onLongPress = {() => dispatch(toggleCalValue())}
+          />
+        )
+      }}
+    />
 
-        <Tabs.Screen 
-          name="Calendar" 
-          component={CalendarContainer}
-          options={{
-            tabBarIcon: ({focused, color, size}) => {
-              return (
-                <Icon 
-                  name="calendar"
-                  type="font-awesome"
-                  color={color}
-                  size={size}
-                />
-              );
-            }
-          }}
-        />
-
-        <Tabs.Screen 
-          name="Pomodoro" 
-          component={PomodoroScreen}
-          options={{
-            tabBarIcon: ({focused, color, size}) => {
-              return (
-                  <Icon 
-                  name="timer"
-                  type="mui"
-                  color={color}
-                  size={size}
-                />
-              );
-            }
-          }}/>
-        
-        <Tabs.Screen 
-          name="Analytics" 
-          component={StatsContainer}
-          options={{
-            tabBarIcon: ({focused, color, size}) => {
-              return (
-                  <Icon 
-                  name="analytics"
-                  type="mui"
-                  color={color}
-                  size={size}
-                />
-              );
-            }
-          }}/>
+    <Tabs.Screen 
+      name="Pomodoro" 
+      component={PomodoroScreen}
+      options={{
+        tabBarIcon: ({focused, color, size}) => {
+          return (
+              <Icon 
+              name="timer"
+              type="mui"
+              color={color}
+              size={size}
+            />
+          );
+        }
+      }}/>
+    
+    <Tabs.Screen 
+      name="Analytics" 
+      component={StatsContainer}
+      options={{
+        tabBarIcon: ({focused, color, size}) => {
+          return (
+              <Icon 
+              name="analytics"
+              type="mui"
+              color={color}
+              size={size}
+            />
+          );
+        }
+      }}/>
 
       </Tabs.Navigator>
     </NavigationContainer>

@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // the reducer is the default export
 // the import here using the default export reducer an alias 
 import userReducer from "./utils/userSlice";
+import appReducer from "./utils/appSlice"
 
 export default configureStore({
   
@@ -10,6 +11,6 @@ export default configureStore({
   // could be omited, since all reducers are thunk reducer
   reducer: {
     user: userReducer,
-    // event:eventReducer,
+    app:appReducer,
   }
 })

@@ -1,7 +1,9 @@
 import { CalendarBody, CalendarContainer, CalendarHeader} from '@howljs/calendar-kit';
-import { useRef,useEffect,useState } from 'react';
-import { View, Text, StyleSheet,TouchableOpacity,Button } from 'react-native';
+import { useRef,useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import IsoToEng from '../utils/IsoToEng';
+import TaskModal from './TaskModal';
+import { useSelector } from 'react-redux';
 
 
 const Calendar = () =>{
@@ -13,19 +15,19 @@ const Calendar = () =>{
   const previousMonday = new Date(now); 
   previousMonday.setDate(now.getDate() - daysToSubtract); 
   const isoString = previousMonday.toISOString();
-
-  const calendarRef = useRef(null);
   const [timeString,setTimeString] = useState(isoString);
 
+  const calendarRef = useRef(null);
+  const [showModel, setShowModel] =  useState(false);
+  const [activeEvent, setActiveEvent] =  useState(undefined);
+
+  const showDayCount = useSelector(state => state.app.dayCount)
+  const events = useSelector(state => state.user.events)
   
   // hook function get trigger after Scroll
   const handleScroll = () => {
     if (calendarRef.current) {
       setTimeString(calendarRef.current.getVisibleStart());
-      // console.log(timeString);
-    }
-    else{
-      console.log("not found");
     }
   };
 
@@ -43,13 +45,30 @@ const Calendar = () =>{
   return(
   <View style = {styles.container}>
     <TimeHeader/>
+    
     <CalendarContainer
       ref={calendarRef}
       onChange={handleScroll}
+      numberOfDays = {showDayCount}
+      events={events}
+      onPressEvent={(event) => {
+        setActiveEvent({ ...event });
+        setShowModel(true);
+    }}
       >
       <CalendarHeader/>
       <CalendarBody/>
     </CalendarContainer>
+
+    <TaskModal 
+      event={activeEvent}
+      visible = {showModel}
+      onClose = {() => {
+        setShowModel(false)
+        setActiveEvent(null)
+      }
+      }
+    />
   </View>
   )
 }
@@ -57,7 +76,8 @@ const Calendar = () =>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft : '4%',
+    position:'relative',
+    marginTop : '10%',
     backgroundColor:'white',
     justifyContent:"center",
   },
@@ -72,14 +92,3 @@ const styles = StyleSheet.create({
 
 export default Calendar
 
-
-// const goToToday = () => {
-//   if (calendarRef.current) {
-//     calendarRef.current.goToDate({
-//       date: new Date().toISOString(),
-//       animatedDate: true,
-//       hourScroll: true,
-//       animatedHour: true,
-//     });
-//   }
-// };
