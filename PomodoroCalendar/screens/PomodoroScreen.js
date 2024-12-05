@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
+import PomodoroTimer from '../component/PomodoroTimer';
 
 function PomodoroScreen({navigation}) {
   return (
@@ -6,6 +7,7 @@ function PomodoroScreen({navigation}) {
       <Text>
         This is Pomodoro Screen
       </Text>
+      <PomodoroTimer/>
     </View>
   );
 }
@@ -15,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink'
+    backgroundColor: 'white'
   }
 });
 export default PomodoroScreen;

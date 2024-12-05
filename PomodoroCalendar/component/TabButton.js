@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, Alert } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import { Icon } from '@rneui/themed';
 
 const TabBarButton = (props) => {
