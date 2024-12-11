@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   dayCount: 1, 
   timer:{
-    secondsAlloc : 3,
-    secondsLeft: 3,
+    secondsAlloc : 25 * 60,
+    secondsLeft: 25 * 60,
     isRunning: false,
   }
 };
@@ -43,7 +43,8 @@ const appSlice = createSlice({
     },
 
     editTimer(state,action) {
-      state.timer.secondsAlloc = action.payload;;
+      state.timer.secondsAlloc = action.payload * 60;
+      state.timer.secondsLeft = action.payload * 60;;
     },
 
   },

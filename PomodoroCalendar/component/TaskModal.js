@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import TextInputBox from "./TextInputBox";
 import PriorityPicker from "./PriorityPicker";
-import TimePicker from "./TimePicker";
+import DateTimePicker from "./DateTimePicker";
 import calMinDiff from "../utils/calMinDiff";
 import {useDispatch} from "react-redux";
 import {addEvent,deleteEvent,editEvent} from "../utils/userSlice"
@@ -126,7 +126,7 @@ export default TaskModal = ({ event, visible, onClose }) => {
             setData={setPriority}
           />
 
-          <TimePicker
+          <DateTimePicker
             text={"Start Time:"}
             visible={showStartPicker}
             setVisible={setShowStartPicker}
@@ -134,7 +134,7 @@ export default TaskModal = ({ event, visible, onClose }) => {
             setData={setStartTime}
           />
 
-          <TimePicker
+          <DateTimePicker
             text={"End Time:  "}
             visible={showEndPicker}
             setVisible={setShowEndPicker}

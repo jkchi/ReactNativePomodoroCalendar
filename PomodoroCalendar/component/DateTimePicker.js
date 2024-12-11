@@ -1,7 +1,7 @@
 import {StyleSheet,View,Text} from "react-native";
 import DatePicker from "@react-native-community/datetimepicker";
 
-export default TimePicker = (props) =>{
+export default DateTimePicker = (props) =>{
 
   const handleChange = (event, selectedDate) => {
     if (selectedDate) {

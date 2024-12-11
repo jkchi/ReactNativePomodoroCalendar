@@ -1,11 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
-
-function DayTaskStatsScreen({navigation}) {
+import TimePickerModal from '../component/TimePickerModal';
+function DayTaskStatsScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>
-        This is Day Task Screen
-      </Text>
+      <Text>This is Day Task Screen</Text>
     </View>
   );
 }
@@ -15,7 +13,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink'
-  }
+  },
+  picker: {
+    height: 40,
+    width: 200,
+  },
 });
+
 export default DayTaskStatsScreen;

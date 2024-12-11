@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrementTimer,startTimer,stopTimer,resetTimer } from '../utils/appSlice';
+import TimerButton from './TimerButton';
 
 const CountdownTimer = () => {
   const secondsLeft = useSelector((state) => state.app.timer.secondsLeft);
@@ -17,6 +18,7 @@ const CountdownTimer = () => {
       }, 1000);
     } else if (secondsLeft === 0) {
       alert('Time Up!');
+      dispatch(resetTimer())
     }
 
     return () => {
@@ -29,25 +31,32 @@ const CountdownTimer = () => {
   return (
     <View style={styles.container}>
 
-      <TouchableOpacity
-        onPress={ () => dispatch(startTimer())}
-      >
+      {isRunning === false 
+        ? <TimerButton
+          onPress ={ () => dispatch(startTimer())}
+          iconName = {"play-circle-filled"}
+          iconProvider = {"mui"}
+          isDisabled = {false}
+          style = {styles.timerButton}
+        />
 
-        <Text>Start</Text>
-      </TouchableOpacity>
+        : <TimerButton
+          onPress ={ () => dispatch(stopTimer())}
+          iconName = {"pause-circle"}
+          iconProvider = {"mui"}
+          isDisabled = {false}
+          style = {styles.timerButton}
+        />
+      }
 
-      <TouchableOpacity
-        onPress={ () => dispatch(stopTimer())}
-      >
-
-        <Text>End</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        onPress={ () => dispatch(resetTimer())}
-      >
-        <Text>Reset</Text>
-      </TouchableOpacity>
+      <TimerButton
+        onPress ={ () => dispatch(resetTimer())}
+        iconName = {"stop-circle"}
+        iconProvider = {"mui"}
+        isDisabled = {isRunning}
+        style = {styles.timerButton}
+      />
+    
 
     </View>
   );
@@ -55,11 +64,11 @@ const CountdownTimer = () => {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flexDirection: 'row',
   },
-  timerText: {
-    fontSize: 48,
-    fontWeight: 'bold',
+  timerButton: {
+    marginLeft:50,
+    marginRight:50
   },
 });
 
