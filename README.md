@@ -1,2 +1,2 @@
 # ReactNativePomodoroCalendar
-the start of the calendar
+Here is the final project for si 669
