@@ -7,7 +7,8 @@ const initialState = {
     secondsLeft: 25 * 60,
     isRunning: false,
   },
-  focusId: null
+  focusId: null,
+  isDaySummary : true,
 };
 
 const appSlice = createSlice({
@@ -55,6 +56,10 @@ const appSlice = createSlice({
       state.focusId = null
     },
 
+    toggleDaySummary(state) {
+      state.isDaySummary = ! state.isDaySummary
+    },
+
   },
 });
 
@@ -67,5 +72,6 @@ export const {
   editTimer,
   setFocusId,
   resetFocusId,
+  toggleDaySummary,
 } = appSlice.actions;
 export default appSlice.reducer;

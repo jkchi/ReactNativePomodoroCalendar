@@ -1,11 +1,18 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet,Text } from 'react-native';
+import { useSelector } from 'react-redux';
+import TaskStatusTable from '../component/TaskStatusTable';
+import TaskPerformanceGraph from '../component/TaskPerformanceGraph';
 
-function TaskStatsScreen({navigation}) {
+function TaskStatsScreen({ navigation }) {
+  const isDaySummary = useSelector(state => state.app.isDaySummary)
+
+
   return (
     <View style={styles.container}>
-      <Text>
-        This is Task Screen
-      </Text>
+      {isDaySummary === true
+        ? <TaskStatusTable/>
+        : <TaskPerformanceGraph/>
+      }
     </View>
   );
 }
@@ -13,9 +20,9 @@ function TaskStatsScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'pink'
-  }
+    backgroundColor:'white'
+  },
+
 });
+
 export default TaskStatsScreen;

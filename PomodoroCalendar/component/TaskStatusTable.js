@@ -9,8 +9,16 @@ const TaskTable = () => {
   const allTasks = useSelector(state => state.user.events)
   const tasks = allTasks.filter(isToday);
   
-  const totalAllocatedTime = 210; // Example total allocated time
-  const totalFocusTime = 275; // Example total actual working time
+ 
+  const totalAllocatedTime = tasks.reduce(
+    (accumulator, item) => accumulator + item.duration,
+    0,
+  );
+
+  const totalFocusTime = tasks.reduce(
+    (accumulator, item) => accumulator + item.focusDuration,
+    0,
+  );
 
 
   const renderRow = ({ item }) => {
@@ -56,6 +64,7 @@ const TaskTable = () => {
 
   return (
     <View style={styles.container}>
+      <Text style = {styles.title}>Summary of the Day</Text>
       <View style={styles.infoContainer}>
         <View style={styles.infoBlockStyled}>
           <Text style={styles.infoValueLarge}>{totalAllocatedTime} min</Text>
@@ -86,6 +95,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginTop:10,
+  },
+  title:{
+    marginTop:30,
+    marginBottom:20,
+    fontSize:25,
+    fontWeight:'bold',
+    textAlign: 'center'
   },
   infoContainer: {
     flexDirection: "row",

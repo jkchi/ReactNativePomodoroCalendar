@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import isoToTime from '../utils/ISOTOTime';
+import isoToTime from '../utils/isoToTime';
 import { useDispatch, useSelector } from 'react-redux';
 import isToday from '../utils/isToday';
 import { setFocusId,resetFocusId } from '../utils/appSlice';

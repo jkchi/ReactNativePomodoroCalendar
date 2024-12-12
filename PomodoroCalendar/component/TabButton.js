@@ -19,10 +19,14 @@ const TabBarButton = (props) => {
       <Icon
         name={props.iconName}
         type={props.iconProvider}
-        size={30}
+        size={25}
         color={isSelected ? '#007bff' : 'gray'}
       />
-      <Text style={{ color: isSelected ? '#007bff' : 'gray' }}>
+      <Text style={{ fontFamily:'San Francisco', 
+                     color: isSelected ? '#007bff' : 'gray', 
+                     fontSize:10,
+                     marginTop:5
+                     }}>
         {props.label} 
       </Text>
     </TouchableOpacity>

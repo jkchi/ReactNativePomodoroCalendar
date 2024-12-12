@@ -211,17 +211,18 @@ export const userSlice = createSlice({
     })
 
     builder.addCase(editEvent.fulfilled, (state, action) => {
-
       const updatedEvent = action.payload;
       const index = state.events.findIndex(event => event.id === updatedEvent.id);
-      let prevEvent = {}
-
+    
       if (index !== -1) {
-        prevEvent = state.events[index]
-        prevEvent.focusDuration += action.payload.focusDuration
-        state.events[index] = prevEvent;
-      } 
-
+        const prevEvent = state.events[index];
+    
+        state.events[index] = {
+          ...prevEvent, 
+          ...updatedEvent, 
+          focusDuration: prevEvent.focusDuration + updatedEvent.focusDuration, 
+        };
+      }
     });
 
     builder.addCase(fetchEvents .fulfilled, (state, action) => {

@@ -1,28 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import WeekScreen from './screens/WeekScreen';
 import PomodoroScreen from './screens/PomodoroScreen';
-import DayTaskScreen from './screens/DayTaskScreen';
 import TaskStatsScreen from './screens/TaskStatsScreen';
-import { Icon } from '@rneui/themed';
 import TabBarButton from './component/TabButton';
 import {useDispatch } from 'react-redux';
-import { toggleCalValue } from './utils/appSlice';
-
-
-const StatsContainer = () => {
-  const Stack = createNativeStackNavigator();
-
-  return (
-        <Stack.Navigator initialRouteName='DayTask' 
-          screenOptions={{headerShown: false}}
-        >
-          <Stack.Screen name='DayTask' component={DayTaskScreen}/>
-          <Stack.Screen name='TaskStats' component={TaskStatsScreen}/>
-        </Stack.Navigator>
-  );
-}
+import { toggleCalValue, toggleDaySummary } from './utils/appSlice';
 
 
 
@@ -56,34 +39,35 @@ const MainNavigator = () => {
     <Tabs.Screen 
       name="Pomodoro" 
       component={PomodoroScreen}
+
       options={{
-        tabBarIcon: ({focused, color, size}) => {
-          return (
-              <Icon 
-              name="timer"
-              type="mui"
-              color={color}
-              size={size}
-            />
-          );
-        }
-      }}/>
+        tabBarButton: (props) => (
+          <TabBarButton
+            {...props}
+            label="Pomodoro"
+            iconProvider = "mui"
+            iconName="timer"
+          />
+        )
+      }}
+      />
     
     <Tabs.Screen 
-      name="Analytics" 
-      component={StatsContainer}
+      name="TaskStats" 
+      component={TaskStatsScreen}
+
       options={{
-        tabBarIcon: ({focused, color, size}) => {
-          return (
-              <Icon 
-              name="analytics"
-              type="mui"
-              color={color}
-              size={size}
-            />
-          );
-        }
-      }}/>
+        tabBarButton: (props) => (
+          <TabBarButton
+            {...props}
+            label="TaskStats"
+            iconProvider = "mui"
+            iconName="analytics"
+            onLongPress = {() => dispatch(toggleDaySummary())}
+          />
+        )
+      }}      
+      />
 
       </Tabs.Navigator>
     </NavigationContainer>
