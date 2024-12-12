@@ -1,7 +1,7 @@
 import { CalendarBody, CalendarContainer, CalendarHeader} from '@howljs/calendar-kit';
 import { useRef,useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import IsoToEng from '../utils/IsoToEng';
+import isoToMonthYear from '../utils/isoToMonthYear';
 import TaskModal from './TaskModal';
 import { useSelector } from 'react-redux';
 
@@ -36,7 +36,7 @@ const Calendar = () =>{
     return (
       <View style = {styles.header}>
         <Text style = {styles.headerText}>
-          {IsoToEng(timeString)}
+          {isoToMonthYear(timeString)}
         </Text>
       </View>
     )
@@ -66,7 +66,7 @@ const Calendar = () =>{
       onClose = {() => {
         setShowModel(false)
         setActiveEvent(null)
-      }
+        }
       }
     />
   </View>

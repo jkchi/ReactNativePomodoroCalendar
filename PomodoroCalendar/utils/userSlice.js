@@ -8,7 +8,7 @@ import { getAuth, signInWithEmailAndPassword,
 
 import { getFirestore, collection, query,
          doc, getDocs, updateDoc, addDoc, deleteDoc,
-         where
+         where,getDoc
 } from "firebase/firestore";
 
 import { getApps,initializeApp } from "firebase/app";
@@ -124,12 +124,13 @@ export const deleteEvent = createAsyncThunk(
 
 export const editEvent = createAsyncThunk(
   'user/editEvent',
-  async ( updatedEvent, thunkAPI) => {
+  async (updatedEvent, thunkAPI) => {
     try {
-      
-      console.log(updatedEvent);
       const eventRef = doc(db, 'Events', updatedEvent.id);
-      await updateDoc(eventRef, { ...updatedEvent });
+      const eventSnap = await getDoc(eventRef);
+      const pastDuration = eventSnap.data().focusDuration
+      const focusDuration = pastDuration + updatedEvent.focusDuration
+      await updateDoc(eventRef, { ...updatedEvent , focusDuration});
 
       return updatedEvent ; 
     } catch (error) {
@@ -210,12 +211,17 @@ export const userSlice = createSlice({
     })
 
     builder.addCase(editEvent.fulfilled, (state, action) => {
+
       const updatedEvent = action.payload;
       const index = state.events.findIndex(event => event.id === updatedEvent.id);
-    
+      let prevEvent = {}
+
       if (index !== -1) {
-        state.events[index] = updatedEvent;
+        prevEvent = state.events[index]
+        prevEvent.focusDuration += action.payload.focusDuration
+        state.events[index] = prevEvent;
       } 
+
     });
 
     builder.addCase(fetchEvents .fulfilled, (state, action) => {

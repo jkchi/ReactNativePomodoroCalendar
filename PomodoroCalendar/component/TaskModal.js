@@ -143,11 +143,18 @@ export default TaskModal = ({ event, visible, onClose }) => {
           />
 
           <Text style = {styles.label}>
-          {`Duration : ${calMinDiff(startTime, endTime)}`}
+          {`Duration : ${calMinDiff(startTime, endTime)} mins`}
           </Text>
 
           <Text style = {styles.label}>
-            {`Focus Duration : 0`}
+            <Text>Focus Duration: </Text>
+            <Text>
+            {event != undefined 
+              ? event.focusDuration
+              :"0"
+            }
+            <Text> mins</Text>
+            </Text>
           </Text>
           
           {event && (<View style = {styles.deleteBtnView}>

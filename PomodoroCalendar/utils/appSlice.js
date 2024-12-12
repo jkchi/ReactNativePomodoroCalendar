@@ -6,7 +6,8 @@ const initialState = {
     secondsAlloc : 25 * 60,
     secondsLeft: 25 * 60,
     isRunning: false,
-  }
+  },
+  focusId: null
 };
 
 const appSlice = createSlice({
@@ -18,7 +19,6 @@ const appSlice = createSlice({
 
     toggleCalValue: (state) => {
       state.dayCount = state.dayCount === 1 ? 7 : 1;
-      console.log(state.dayCount)
     },
     
     startTimer(state) {
@@ -47,6 +47,14 @@ const appSlice = createSlice({
       state.timer.secondsLeft = action.payload * 60;;
     },
 
+    setFocusId(state,action) {
+      state.focusId = action.payload 
+    },
+
+    resetFocusId(state) {
+      state.focusId = null
+    },
+
   },
 });
 
@@ -57,5 +65,7 @@ export const {
   decrementTimer, 
   resetTimer,
   editTimer,
+  setFocusId,
+  resetFocusId,
 } = appSlice.actions;
 export default appSlice.reducer;

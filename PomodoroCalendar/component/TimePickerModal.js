@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
@@ -9,7 +8,6 @@ const TimePickerModal = (props) => {
         animationType="fade"
         transparent={true}
         visible={props.visible}
-        onRequestClose={() => props.setVisible(false)}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -20,7 +18,7 @@ const TimePickerModal = (props) => {
               style={{ width: '80%' }}
               itemStyle = {{color:"black"}}
             >
-              {[15, 20, 25, 30, 35].map((value) => (
+              {[0.05,10,15, 20, 25, 30, 35].map((value) => (
                 <Picker.Item key={value} label={`${value} Min`} value={String(value)} />
               ))}
             </Picker>
@@ -50,27 +48,6 @@ const TimePickerModal = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#E8EAF6',
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    fontWeight: 'bold',
-  },
-  openModalButton: {
-    backgroundColor: '#007bff',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',

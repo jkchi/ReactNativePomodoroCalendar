@@ -1,4 +1,4 @@
-const IsoToEng = (isoString) => {
+const isoToMonthYear = (isoString) => {
   const year = isoString.substring(0, 4);
   const month = isoString.substring(5, 7);
 
@@ -11,4 +11,4 @@ const IsoToEng = (isoString) => {
   return `${monthName}    ${year}`;
 };
 
-export default IsoToEng;
+export default isoToMonthYear;

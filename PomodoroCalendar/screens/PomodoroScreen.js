@@ -4,9 +4,6 @@ import PomodoroTimer from '../component/PomodoroTimer';
 function PomodoroScreen({navigation}) {
   return (
     <View style={styles.container}>
-      <Text>
-        This is Pomodoro Screen
-      </Text>
       <PomodoroTimer/>
     </View>
   );
