@@ -106,7 +106,14 @@ const LineChart = ({ data,title }) => {
         {data.map((d, index) => {
           const x = padding + 20 + (index * (width - padding * 2 - 40)) / (data.length - 1);
           const date = new Date(d.timestamp);
-          const formattedDate = `${date.getMonth() + 1}-${date.getDate()}`;
+          
+          const formatter = new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/New_York",
+            month: "numeric",
+            day: "numeric",
+          });
+        
+          const formattedDate = formatter.format(date); 
           return (
             <Text
               key={`x-label-${index}`}
