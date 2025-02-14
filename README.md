@@ -123,7 +123,35 @@ This project uses React Native (Expo) and Firebase. Below are the instructions t
    ```
    - Use **`i`** to launch the iOS simulator, **`a`** for Android, or scan the QR code with the Expo Go app.
 
+## Example  
 
+### Login/Register
+
+
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/log_in.png" alt="Logo" width="300" style="margin:15;">
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/register.png" alt="Logo" width="300" style="margin:15">
+
+  
+
+### Performance Statistics
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/stats_bar.png" alt="Logo" width="300" style="margin:15">
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/stats_task.png" alt="Logo" width="300" style="margin:15">
+
+### Pomodoro Timer
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/timer.png" alt="Logo" width="300" style="margin:15">
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/timer_setting.png" alt="Logo" width="300" style="margin:15">
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/focus.png" alt="Logo" width="300" style="margin:15">
+
+### Calendar
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/day.png" alt="Logo" width="300" style="margin:15">
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/week.png" alt="Logo" width="300" style="margin:15">
+
+### Add Task
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/add_task.png" alt="Logo" width="300" style="margin:15">
+  <img src="https://raw.githubusercontent.com/jkchi/ReactNativePomodoroCalendar/main/images/add_task_1.png" alt="Logo" width="300" style="margin:15">
+
+## Demo Video
+https://youtu.be/vPUP4sAKaJo
 ## Contact
 
 **Author**: [Jinkui Chi](mailto:chijk@umich.edu)  
